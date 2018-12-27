@@ -1,0 +1,35 @@
+{
+	"AWSEBDockerrunVersion":2,
+	"containerDefinitions": [
+		{
+			"name": "client",
+			"image": "mtiwari24/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "mtiwari24/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "mtiwari24/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+				{
+			"name": "nginx",
+			"image": "mtiwari24/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [
+				{ "hostport": 80,
+					"containerPort": 80
+				}
+			],
+			"links": [ "client", "server" ]
+		}
+	]
+}
